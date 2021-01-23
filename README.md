@@ -52,15 +52,11 @@
    Association
 
    - belongs_to :items
-   - has_one :buyer_managements
+   - has_many :buyer_managements
 
 buyer_managementsテーブル
 
 | Column    | Type       | Options                        |
 | ------    | ---------- | -----------                    |
-| user      | references | null: false, foreign_key: true |
+| purchases | references | null: false, foreign_key: true |
 | item      | references | null: false, foreign_key: true |
-
-Association
-
-belongs_to :purchases
