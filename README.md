@@ -17,7 +17,7 @@
    Association
    
    - has_many :items
-   - has_many :buyer_management
+   - has_many :buyer_managements
 
   items テーブル
 
@@ -30,7 +30,7 @@
 | shipping_charge_id      | integer    | null: false                    |
 | shipment_source_area_id | integer    | null: false                    |
 | days_to_ship_id         | integer    | null: false                    |
-| price                   | string     | null: false                    |
+| price                   | integer    | null: false                    |
 | user                    | references | null: false, foreign_key: true |
 
    Association
