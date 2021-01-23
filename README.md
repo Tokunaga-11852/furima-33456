@@ -17,7 +17,7 @@
    Association
    
    - has_many :items
-   - has_one :buyer_management
+   - has_many :buyer_management
 
   items テーブル
 
@@ -35,7 +35,7 @@
 
    Association
    - belongs_to :user
-   - has_one :purchase
+   - has_one :buyer_management
 
    purchasesテーブル
 
@@ -51,14 +51,13 @@
 
    Association
 
-   - belongs_to :item
    - belongs_to :buyer_management
 
 buyer_managementsテーブル
 
 | Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
-| purchase  | references | null: false, foreign_key: true |
+| user      | references | null: false, foreign_key: true |
 | item      | references | null: false, foreign_key: true |
 
   - belongs_to :item
