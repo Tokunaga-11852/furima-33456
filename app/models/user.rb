@@ -10,7 +10,7 @@ class User < ApplicationRecord
     validates :first_katakana, format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters." }
     validates :second_katakana, format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters." }
     validates :birthday
-    validates :password, format: (/\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i)
+    validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[\w-]{6,100}+\z/i }
 
   end
     has_many :items
