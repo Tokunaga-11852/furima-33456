@@ -3,13 +3,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         validates :nickname, presence: true
-         validates :first_name, presence: true
-         validates :second_name, presence: true
-         validates :first_katakana, presence: true
-         validates :second_katakana, presence: true
-         validates :birthday, presence: true
+  with_options presence: true do
+    validates :nickname, format: { with: /\A[a-z0-9]+\z/i, message: "is invalid. Input half-width characters." }
+    validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥々]/, message: "is invalid. Input full-width characters." }
+    validates :second_name, format: { with: /\A[ぁ-んァ-ン一-龥々]/, message: "is invalid. Input full-width characters." }
+    validates :first_katakana, format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters." }
+    validates :second_katakana, format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters." }
+    validates :birthday
+    validates :password, format: (/\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i)
 
-        has_many :items
-        has_many :buyer_management
+  end
+    has_many :items
+    has_many :buyer_managements
 end
