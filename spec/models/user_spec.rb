@@ -44,6 +44,12 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include "Password is too short (minimum is 6 characters)"
     end
+    it "パスワードが英字のみでは登録できない" do
+      @user.password = "aaaabbbb"
+      @user.password_confirmation = "aaaabbbb"
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Password is invalid"
+    end
 
     it "パスワードは、半角英数字混合で入力が必須であること" do
       @user.password = "000000"
@@ -109,9 +115,9 @@ RSpec.describe User, type: :model do
     end
 
     it "ユーザー本名の名前のフリガナは、全角(カタカナ)での入力が必須であること" do
-      @user.second_katakana = ""
+      @user.second_katakana = "あいうえお"
       @user.valid?
-      expect(@user.errors.full_messages).to include "Second katakana can't be blank"
+      expect(@user.errors.full_messages).to include "Second katakana is invalid. Input full-width katakana characters."
     end
 
     it "生年月日が必須であること" do
