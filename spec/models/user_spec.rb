@@ -5,6 +5,9 @@ RSpec.describe User, type: :model do
     before do
       @user = FactoryBot.build(:user)
     end
+    it "すべての情報が正しく入力されていれば新規登録が正常に完了する" do
+      expect(@user).to be_valid
+    end
 
     it "ニックネームが必須であること" do
       @user.nickname = nil
@@ -109,13 +112,13 @@ RSpec.describe User, type: :model do
     end
 
     it "ユーザー本名の苗字のフリガナは、全角(カタカナ)での入力が必須であること" do
-      @user.first_katakana = ""
+      @user.first_katakana = "愛知県"
       @user.valid?
-      expect(@user.errors.full_messages).to include "First katakana can't be blank"
+      expect(@user.errors.full_messages).to include "First katakana is invalid. Input full-width katakana characters."
     end
 
     it "ユーザー本名の名前のフリガナは、全角(カタカナ)での入力が必須であること" do
-      @user.second_katakana = "あいうえお"
+      @user.second_katakana = "あいちけん"
       @user.valid?
       expect(@user.errors.full_messages).to include "Second katakana is invalid. Input full-width katakana characters."
     end
