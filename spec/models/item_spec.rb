@@ -53,7 +53,7 @@ RSpec.describe Item, type: :model do
             expect(@item.errors.full_messages).to include("Days to ship must be other than 1")
 
           end
-          it 'priceが1では出品できない' do
+          it 'priceが空では出品できない' do
             @item.price = ''
             @item.valid?
             expect(@item.errors.full_messages).to include("Price can't be blank")
