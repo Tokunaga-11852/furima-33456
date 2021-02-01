@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
   before_action :authenticate_user!, only: [:new]
   before_action :definition, only: [:edit, :show, :conditions, :update]
-  before_action :conditions, only: [:edit]
+  before_action :conditions, only: [:edit, :update]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
