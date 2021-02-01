@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show]
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:new, :edit]
   before_action :definition, only: [:edit, :show, :conditions, :update]
   before_action :conditions, only: [:edit, :update]
 
@@ -47,12 +46,6 @@ class ItemsController < ApplicationController
   def conditions
     unless current_user.id == @item.user_id
     redirect_to action: :index
-    end
-  end
-
-  def move_to_index
-    unless user_signed_in?
-      redirect_to new_user_session_path
     end
   end
 
