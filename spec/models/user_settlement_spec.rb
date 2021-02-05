@@ -1,16 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe UserSettlement, type: :model do
-    describe 'ユーザーのアドレス情報の保存' do
-      before do
-        item = FactoryBot.create(:item)
-        user = FactoryBot.create(:user)
-        @user_settlement = FactoryBot.build(:user_settlement, item_id: item.id, user_id: user.id)
-        sleep 3
-      end
+  describe 'ユーザーのアドレス情報の保存' do
+    before do
+      item = FactoryBot.create(:item)
+      user = FactoryBot.create(:user)
+      @user_settlement = FactoryBot.build(:user_settlement, item_id: item.id, user_id: user.id)
+      sleep 3
+    end
+
+    context '商品が購入できるとき' do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@user_settlement).to be_valid
       end
+    end
+
+    context '商品が購入できないとき' do
       it 'postal_codeが空だと保存できないこと' do
         @user_settlement.postal_code = ''
         @user_settlement.valid?
@@ -55,5 +60,16 @@ RSpec.describe UserSettlement, type: :model do
         @user_settlement.valid?
         expect(@user_settlement.errors.full_messages).to include("Token can't be blank")
       end
+      it 'user情報がnilだと保存できない' do
+        @user_settlement.user_id = nil
+        @user_settlement.valid?
+        expect(@user_settlement.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item情報がnilだと保存できない' do
+        @user_settlement.item_id = nil
+        @user_settlement.valid?
+        expect(@user_settlement.errors.full_messages).to include("Item can't be blank")
+      end
     end
+  end
 end
