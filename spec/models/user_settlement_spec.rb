@@ -13,6 +13,10 @@ RSpec.describe UserSettlement, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@user_settlement).to be_valid
       end
+      it 'building_nameは空でも保存できること' do
+        @user_settlement.building_name = ''
+        expect(@user_settlement).to be_valid
+      end
     end
 
     context '商品が購入できないとき' do
@@ -40,10 +44,6 @@ RSpec.describe UserSettlement, type: :model do
         @user_settlement.address = ''
         @user_settlement.valid?
         expect(@user_settlement.errors.full_messages).to include("Address can't be blank")
-      end
-      it 'building_nameは空でも保存できること' do
-        @user_settlement.building_name = ''
-        expect(@user_settlement).to be_valid
       end
       it 'phone_numberが空だと保存できないこと' do
         @user_settlement.phone_number = ''

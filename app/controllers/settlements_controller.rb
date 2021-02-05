@@ -1,7 +1,7 @@
 class SettlementsController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :set_item, only: [:create, :index, :conditions]
-  before_action :conditions
+  before_action :conditions, only: [:edit] 
 
   def index
     @settlement = UserSettlement.new
