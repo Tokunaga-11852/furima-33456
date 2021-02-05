@@ -35,6 +35,11 @@ RSpec.describe UserSettlement, type: :model do
         @user_settlement.valid?
         expect(@user_settlement.errors.full_messages).to include("Shipment source area can't be blank")
       end
+      it 'shipment_source_area_idが空では保存できない' do
+        @user_settlement.shipment_source_area_id = ''
+        @user_settlement.valid?
+        expect(@user_settlement.errors.full_messages).to include("Shipment source area can't be blank")
+      end
       it 'municipalityが空では保存できないこと' do
         @user_settlement.municipality = ''
         @user_settlement.valid?
