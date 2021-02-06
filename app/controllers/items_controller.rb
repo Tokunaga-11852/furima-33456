@@ -65,7 +65,7 @@ class ItemsController < ApplicationController
   end
 
   def conditions
-    if current_user.id == @item.user_id || @item.buyer_management != nil
+    if current_user.id == @item.user_id ||  @item.buyer_management != nil
     redirect_to action: :index
     end
   end

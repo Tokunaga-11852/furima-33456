@@ -10,10 +10,9 @@ class UserSettlement
     validates :address
     validates :shipment_source_area_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
-    validates :phone_number, format: { with: /\d{11}/, message: "phone_number is invalid. not Include hyphen(-). up to 11 characters" }
+    validates :phone_number, format: { with: /\A\d{11}\z/, message: "phone_number is invalid. not Include hyphen(-). up to 11 characters" }
   end
-
-
+  
   def save
 
     # 誰が何を買ったかを保存

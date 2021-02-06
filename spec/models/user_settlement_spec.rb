@@ -55,10 +55,15 @@ RSpec.describe UserSettlement, type: :model do
         @user_settlement.valid?
         expect(@user_settlement.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberはハイフン不要で、11文字以内でないと保存できない' do
-        @user_settlement.phone_number = '090-9988-77665'
+      it 'phone_numberはハイフン無し12桁だと保存できない' do
+        @user_settlement.phone_number = '090998877665'
         @user_settlement.valid?
         expect(@user_settlement.errors.full_messages).to include("Phone number phone_number is invalid. not Include hyphen(-). up to 11 characters")
+      end
+      it 'phone_numberは11桁以内でもハイフンが入っていると保存できない' do
+          @user_settlement.phone_number = '090-223-44400'
+          @user_settlement.valid?
+          expect(@user_settlement.errors.full_messages).to include("Phone number phone_number is invalid. not Include hyphen(-). up to 11 characters")
       end
       it 'phone_nmuberは英数混合では保存できないこと' do
         @user_settlement.phone_number = 'aaa0000aa00'
