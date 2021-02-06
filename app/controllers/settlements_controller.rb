@@ -57,3 +57,8 @@ class SettlementsController < ApplicationController
   end
 end
 
+# 54行目の記述は出品者自身が自身の商品購入ページに遷移させない為の記述である。
+# if current_user.id == @item.user_id 
+#   の記述を指示通り
+# if current_user.id != @item.user_id 
+#   に変えると上記ができてしまう為不可である
