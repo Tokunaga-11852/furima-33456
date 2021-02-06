@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :definition, only: [:edit, :show, :conditions, :update, :destroy]
   before_action :conditions, only: [:edit, :update, :destroy]
 
@@ -23,7 +23,6 @@ class ItemsController < ApplicationController
   def edit
   end
 
-
   def destroy
     if @item.destroy
       redirect_to root_path
@@ -31,7 +30,6 @@ class ItemsController < ApplicationController
       render :show
     end
   end
-  
 
   def update
     if @item.update(item_params)
@@ -46,7 +44,20 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:item_name, :item_information, :category_id, :item_condition_id, :shipping_charge_id, :shipment_source_area_id, :days_to_ship_id, :price, :image).merge(user_id: current_user.id)
+    params.require(:item
+    ).permit(
+      :item_name, 
+      :item_information, 
+      :category_id, 
+      :item_condition_id, 
+      :shipping_charge_id, 
+      :shipment_source_area_id, 
+      :days_to_ship_id, 
+      :price, 
+      :image
+    ).merge(
+      user_id: current_user.id
+    )
   end
   
   def definition
@@ -54,9 +65,8 @@ class ItemsController < ApplicationController
   end
 
   def conditions
-    unless current_user.id == @item.user_id
+    if current_user.id != @item.user_id ||  @item.buyer_management != nil
     redirect_to action: :index
     end
   end
-
 end
