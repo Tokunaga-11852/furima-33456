@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2021_02_02_092623) do
     t.integer "shipment_source_area_id", null: false
     t.string "municipality", null: false
     t.string "address", null: false
-    t.string "building_name", null: false
+    t.string "building_name"
     t.string "phone_number", null: false
     t.bigint "buyer_management_id", null: false
     t.datetime "created_at", precision: 6, null: false

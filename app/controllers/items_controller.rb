@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :settlement]
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :definition, only: [:edit, :show, :conditions, :update, :destroy]
   before_action :conditions, only: [:edit, :update, :destroy]
 
@@ -65,7 +65,7 @@ class ItemsController < ApplicationController
   end
 
   def conditions
-    unless current_user.id == @item.user_id
+    if current_user.id == @item.user_id || @item.buyer_management != nil
     redirect_to action: :index
     end
   end
