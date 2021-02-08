@@ -62,5 +62,6 @@ gem 'image_processing', '~> 1.2'
 gem 'active_hash'
 gem 'pry-rails'
 gem 'payjp'
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
+gem 'rspec-rails'
+gem 'factory_bot_rails'
+gem "aws-sdk-s3", require: false
